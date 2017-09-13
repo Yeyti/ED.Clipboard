@@ -13,6 +13,5 @@ namespace GwenNet.Platform{
 
         public static bool IsLinux() =>
             RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
-
     }
 }

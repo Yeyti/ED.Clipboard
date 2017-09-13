@@ -1,4 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Text;
 
 namespace GwenNet.Platform
 {
@@ -7,7 +10,7 @@ namespace GwenNet.Platform
         public static string Bash(this string cmd)
         {
             var escapedArgs = cmd.Replace("\"", "\\\"");
-            string result = Run("/bin/bash", $"-c \"{escapedArgs}\"");
+            string result = Run("#!/usr/bin/env bash", $"set -c \"{escapedArgs}\"");
             return result;
         }
 
@@ -32,7 +35,6 @@ namespace GwenNet.Platform
                 }
             };
             process.Start();
-            
             string result = process.StandardOutput.ReadToEnd();
             process.WaitForExit();
             return result;

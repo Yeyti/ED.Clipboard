@@ -4,37 +4,29 @@ using System.Text;
 
 namespace GwenNet.Platform
 {
-    public class Clipboard{
-        private static string buf;
-
+    class Clipboard{
         public static void Copy(string val){
             if (OS.IsWindows()){
                 $"echo {val} | clip".Bat();
             }
 
-            if (OS.IsMacOS()){
+            if (OS.IsMacOS()||OS.IsLinux()){
                 $"echo \"{val}\" | pbcopy".Bash();
             }
         }
 
-        
-        public static bool ContainsText()
+        public static void Past()
         {
-            /*if (OS.IsWindows())
+            /*
+            if (OS.IsWindows())
             {
-                buf = $"echo {val} | clip".Bat();
+                $"echo {val} | clip".Bat();
             }*/
 
-            if (OS.IsMacOS())
+            if (OS.IsMacOS() || OS.IsLinux())
             {
-                buf = $"echo pbpaste".Bash();
+                $"echo pbpast".Bash();
             }
-            
-            return buf != "";
-        }
-
-        public static string GetText(){
-            return buf;
         }
     }
 }
